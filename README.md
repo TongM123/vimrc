@@ -9,11 +9,15 @@ vim配置文件以及一些vim插件
 
 ### Emmet zenCoding -- 代码自动补全插件
 
-插件地址：
+插件地址：[https://github.com/mattn/emmet-vim](https://github.com/mattn/emmet-vim)
 
-使用方法：
+使用方法：把解压后的文件放在~/.vim里面即可
 
-相关配置：见.vimrc文件
+相关配置：更改快捷键：
+
+```
+"let g:user_emmet_leader_key='<C-e>'
+```
 
 
 ### Less hightlight -- LESS高亮插件
@@ -22,7 +26,7 @@ vim配置文件以及一些vim插件
 
 使用方法：把下载的less.vim文件放在~/.vim/syntax文件夹里面即可
 
-相关配置：在.vimrc里面添加下面这一句：
+相关配置：在.vimrc里面添加以下代码：
 
 ```
 au BufNewFile,BufRead *.less set filetype=less
@@ -64,8 +68,12 @@ let g:neocomplcache_enable_at_startup = 1
 
 ### nerdtree -- 目录树结构文件浏览插件
 
-插件地址：
+插件地址：[https://github.com/scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 
 使用方法：把解压后的文件放在~/.vim里面即可
 
-相关配置：见.vimrc文件
+相关配置：在.vimrc里面添加以下代码：
+
+```
+nmap <F2> :NERDTreeToggle<CR>
+```
