@@ -77,3 +77,10 @@ let g:neocomplcache_enable_at_startup = 1
 ```
 nmap <F2> :NERDTreeToggle<CR>
 ```
+更厉害的配置推荐：
+
+[https://github.com/humiaozuzu/dot-vimrc](https://github.com/humiaozuzu/dot-vimrc)
+
+[https://github.com/spf13/spf13-vim](https://github.com/spf13/spf13-vim)
+
+MIT
