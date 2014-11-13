@@ -1,151 +1,89 @@
-**neocomplcache**
-=================
+# Tagbar: a class outline viewer for Vim
 
-Description
------------
+## What Tagbar is
 
-neocomplcache is the abbreviation of "neo-completion with cache". It
-provides keyword completion system by maintaining a cache of keywords in the
-current buffer. neocomplcache could be customized easily and has a lot more
-features than the Vim's standard completion feature.
+Tagbar is a Vim plugin that provides an easy way to browse the tags of the
+current file and get an overview of its structure. It does this by creating a
+sidebar that displays the ctags-generated tags of the current file, ordered by
+their scope. This means that for example methods in C++ are displayed under
+the class they are defined in.
 
-If you use Vim 7.3.885 or above with if\_lua feature, you should use
-neocomplete.  It is faster than neocomplcache.
+## What Tagbar is not
 
-https://github.com/Shougo/neocomplete.vim
+Tagbar is not a general-purpose tool for managing `tags` files. It only
+creates the tags it needs on-the-fly in-memory without creating any files.
+`tags` file management is provided by other plugins, like for example
+[easytags](https://github.com/xolox/vim-easytags).
 
-Installation
-============
+## Dependencies
 
-* Extract the file and put files in your Vim directory
-   (usually ~/.vim/ or Program Files/Vim/vimfiles on Windows).
-* Execute `|:NeoComplCacheEnable|` command or
-`let g:neocomplcache_enable_at_startup = 1`
-in your `.vimrc`. Not in `.gvimrc`(`_gvimrc`)!
+[Vim 7.0](http://www.vim.org/) (But see note below)  
+[Exuberant ctags 5.5](http://ctags.sourceforge.net/)
 
-Caution
--------
+## Installation
 
-Because all variable names were changed in neocomplcache Ver.5, it is not
-backwards compatible. If you want to upgrade, you should use the following
-script from Mr.thinca.
+Extract the archive or clone the repository into a directory in your
+`'runtimepath'`, or use a plugin manager of your choice like
+[pathogen](https://github.com/tpope/vim-pathogen). Don't forget to run
+`:helptags` if your plugin manager doesn't do it for you so you can access the
+documentation with `:help tagbar`.
 
-http://gist.github.com/422503
+Note: Vim versions < 7.0.167 have a bug that prevents Tagbar from working. If
+you are affected by this use this alternate Tagbar download instead:
+[zip](https://github.com/majutsushi/tagbar/zipball/70fix). It is on par with
+version 2.2 but probably won't be updated after that due to the amount of
+changes required.
 
-Snippets feature(snippets\_complete source) was split from Ver.7.
-If you used it, please install neosnippet source manually.
+If the ctags executable is not installed in one of the directories in your
+`$PATH` environment variable you have to set the `g:tagbar_ctags_bin`
+variable, see the documentation for more info.
 
-https://github.com/Shougo/neosnippet
+## Quickstart
 
-Screen shots
-============
-
-Original filename completion.
------------
-![Original filename completion.](http://1.bp.blogspot.com/_ci2yBnqzJgM/TD1O5_bOQ2I/AAAAAAAAADE/vHf9Xg_mrTI/s1600/filename_complete.png)
-
-Omni completion.
-----------------
-![Omni completion.](http://2.bp.blogspot.com/_ci2yBnqzJgM/TD1PTolkTBI/AAAAAAAAADU/knJ3eniuHWI/s1600/omni_complete.png)
-
-Completion with vimshell(http://github.com/Shougo/vimshell).
-------------------------------------------------------------
-![Completion with vimshell(http://github.com/Shougo/vimshell).](http://1.bp.blogspot.com/_ci2yBnqzJgM/TD1PLfdQrwI/AAAAAAAAADM/2pSFRTHwYOY/s1600/neocomplcache_with_vimshell.png)
-
-Vim completion
-------------------------------------------------------------
-![Vim completion.](http://1.bp.blogspot.com/_ci2yBnqzJgM/TD1PfKTlwnI/AAAAAAAAADs/nOGWTRLuae8/s1600/vim_complete.png)
-
-Setting examples
+Put something like the following into your ~/.vimrc:
 
 ```vim
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Enable heavy features.
-" Use camel case completion.
-"let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-"let g:neocomplcache_enable_underbar_completion = 1
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplcache#smart_close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplcache_enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplcache_enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_force_omni_patterns')
-  let g:neocomplcache_force_omni_patterns = {}
-endif
-let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+nmap <F8> :TagbarToggle<CR>
 ```
+
+If you do this the F8 key will toggle the Tagbar window. You can of course use
+any shortcut you want. For more flexible ways to open and close the window
+(and the rest of the functionality) see the documentation.
+
+## Support for additional filetypes
+
+For filetypes that are not supported by Exuberant Ctags check out [the
+wiki](https://github.com/majutsushi/tagbar/wiki) to see whether other projects
+offer support for them and how to use them. Please add any other
+projects/configurations that you find or create yourself so that others can
+benefit from them, too.
+
+## Note: If the file structure display is wrong
+
+If you notice that there are some errors in the way your file's structure is
+displayed in Tagbar, please make sure that the bug is actually in Tagbar
+before you report an issue. Since Tagbar uses
+[exuberant-ctags](http://ctags.sourceforge.net/) and compatible programs to do
+the actual file parsing, it is likely that the bug is actually in the program
+responsible for that filetype instead.
+
+There is an example in `:h tagbar-issues` about how to run ctags manually so
+you can determine where the bug actually is. If the bug is actually in ctags,
+please report it on their website instead, as there is nothing I can do about
+it in Tagbar. Thank you!
+
+You can also have a look at [ctags bugs that have previously been filed
+against Tagbar](https://github.com/majutsushi/tagbar/issues?labels=ctags-bug&page=1&state=closed).
+
+## Screenshots
+
+![screenshot1](https://i.imgur.com/Sf9Ls2r.png)
+![screenshot2](https://i.imgur.com/n4bpPv3.png)
+
+## License
+
+Vim license, see LICENSE
+
+## Maintainer
+
+Jan Larres <[jan@majutsushi.net](mailto:jan@majutsushi.net)>

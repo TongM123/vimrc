@@ -31,7 +31,7 @@ set bufhidden=hide
 set showmatch "高亮显示匹配的括号
 
 "设置配色方案
-"colorscheme darkblue
+colorscheme molokai-yond
 
 "设置编码
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
@@ -58,18 +58,49 @@ let Powerline_symbols='compatible'
 
 "   neocomplcache
 ""==== 代码提示插件
-let g:neocomplcache_enable_at_startup = 1     "vim 启动时启用插件
-" let g:neocomplcache_disable_auto_complete = 1 "不自动弹出补全列表
+let g:neocomplcache_enable_at_startup = 0     "vim 启动时启用插件
+let g:neocomplcache_disable_auto_complete = 1 "不自动弹出补全列表
 
 
 "   nerdtree
 "==== 目录树结构的文件浏览插件
-nmap <C-w> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=26
+nmap <F2> :NERDTreeToggle<CR>
 
+
+" vim-javascript
+"==== javascript高亮增强
+let javascript_enable_domhtmlcss = 1
 
 " Less hightlight
 " Less高亮
 au BufNewFile,BufRead *.less set filetype=less
+
+
+"    Tagbar (base on ctags)
+"====显示当前文件的标签
+let g:tagbar_width=26
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1
+let g:tagbar_show_linenumbers = 2
+let g:tagbar_singleclick = 1
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+if filereadable(expand("$HOME/.vim/ctags.vim"))
+	source $HOME/.vim/ctags.vim
+endif
+
+" ctags config
+"==== for CSS
+
+
+" miniBufExplorer
+"====多文件编辑
+let g:miniBufExplMapWindowNavVim = 1   
+let g:miniBufExplMapWindowNavArrows = 1   
+let g:miniBufExplMapCTabSwitchBufs = 1   
+let g:miniBufExplModSelTarget = 1  
+let g:miniBufExplMoreThanOne=0  
+
 
 
 "========= MyVimConfig End   ==========

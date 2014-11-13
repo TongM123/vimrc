@@ -1,10 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/usr/local/nginx/conf'
-let g:netrw_dirhist_2='/Users/wangchi/Git/studying/.git'
-let g:netrw_dirhist_3='/usr/local/nginx/conf'
-let g:netrw_dirhist_4='/Users/wangchi/Bitbucket/qianduanim/.git'
-let g:netrw_dirhist_5='/usr/local/nginx'
-let g:netrw_dirhist_6='/usr/local/nginx/conf'
-let g:netrw_dirhist_7='/usr/local/nginx'
-let g:netrw_dirhist_8='/usr/local/nginx/conf'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/wangchi/Git/lab/demos/cainixihuan/html'
+let g:netrw_dirhist_2='/Users/wangchi/Git/lab/demos/cainixihuan'
+let g:netrw_dirhist_3='/Users/wangchi/Git/lab/demos/cainixihuan/html'
+let g:netrw_dirhist_4='/Users/wangchi/Git/lab/demos/cainixihuan/html/modules'
+let g:netrw_dirhist_5='/Users/wangchi/Git/Yond.js'
+let g:netrw_dirhist_6='/Users/wangchi/Git/jiaemall/.git'
