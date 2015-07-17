@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/wangchi/Development/GitHub/mocker/test/express-test/templates'
+let g:netrw_dirhist_2='/Users/wangchi/.vim'
+let g:netrw_dirhist_3='/Users/wangchi/Development/GitHub/studying/JavaScript/js-keyboard-events'
+let g:netrw_dirhist_4='/Users/wangchi/Development/GitHub/studying/JavaScript/html-encode-decode'
